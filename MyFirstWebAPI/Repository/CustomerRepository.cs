@@ -5,7 +5,16 @@ namespace MyFirstWebAPI.Repository;
 
 public class CustomerRepository
 {
-    private readonly string _dataPath = Path.Combine(AppContext.BaseDirectory, "Data", "customers.json");
+    private readonly string _dataPath = Path.Combine(
+        AppContext.BaseDirectory, 
+        "..", "..", "..",  // Von bin/Debug/net10.0 zurück zum Projektverzeichnis
+        "Data", 
+        "customers.json"
+    );
+    private readonly JsonSerializerOptions _jsonOptions = new() 
+    { 
+        PropertyNameCaseInsensitive = true 
+    };
 
     public async Task<List<Customer>> GetAllAsync()
     {
@@ -15,7 +24,7 @@ public class CustomerRepository
                 return new List<Customer>();
 
             var json = await File.ReadAllTextAsync(_dataPath);
-            return JsonSerializer.Deserialize<List<Customer>>(json) ?? new List<Customer>();
+            return JsonSerializer.Deserialize<List<Customer>>(json, _jsonOptions) ?? new List<Customer>();
         }
         catch
         {
