@@ -34,6 +34,13 @@ if (app.Environment.IsDevelopment())
     app.MapOpenApi();
     app.UseSwagger();
     app.UseSwaggerUI();
+    
+    // Redirect root to Swagger UI
+    app.MapGet("/", context =>
+    {
+        context.Response.Redirect("/swagger/index.html", permanent: false);
+        return Task.CompletedTask;
+    });
 }
 else
 {
