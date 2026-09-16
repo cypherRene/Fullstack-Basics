@@ -1,0 +1,21 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": ".NET Launch MyFirstWebAPI",
+            "type": "coreclr",
+            "request": "launch",
+            "program": "${workspaceFolder}/MyFirstWebAPI/bin/Debug/net10.0/MyFirstWebAPI.dll",
+            "cwd": "${workspaceFolder}/MyFirstWebAPI",
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development"
+            },
+            "preLaunchTask": "build MyFirstWebAPI",
+            "serverReadyAction": {
+                "action": "openExternally",
+                "pattern": "\\bNow listening on:\\s+(https?://\\S+)",
+                "uriFormat": "%s/swagger/index.html"
+            }
+        }
+    ]
+}

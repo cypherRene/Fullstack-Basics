@@ -14,6 +14,7 @@ builder.Services.AddSwaggerGen();
 // Register Repository and Service
 builder.Services.AddSingleton<CustomerRepository>();
 builder.Services.AddSingleton<CustomerService>();
+builder.Services.AddScoped<EmployeeService>();
 
 // Add CORS
 builder.Services.AddCors(options =>
