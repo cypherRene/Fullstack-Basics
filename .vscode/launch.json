@@ -16,6 +16,23 @@
                 "pattern": "\\bNow listening on:\\s+(https?://\\S+)",
                 "uriFormat": "%s/swagger/index.html"
             }
+        },
+        {
+            "name": ".NET Launch MyFirstUI",
+            "type": "blazorwasm",
+            "request": "launch",
+            "cwd": "${workspaceFolder}/MyFirstUI",
+            "url": "http://localhost:5002",
+        }
+    ],
+    "compounds": [
+        {
+            "name": "API + UI",
+            "configurations": [
+                ".NET Launch MyFirstWebAPI",
+                ".NET Launch MyFirstUI"
+            ],
+            "stopAll": true
         }
     ]
 }

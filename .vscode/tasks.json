@@ -14,6 +14,91 @@
                 "kind": "build",
                 "isDefault": true
             }
+        },
+        {
+            "label": "build MyFirstUI",
+            "type": "process",
+            "command": "dotnet",
+            "args": [
+                "build",
+                "${workspaceFolder}/MyFirstUI/MyFirstUI.csproj"
+            ],
+            "problemMatcher": "$msCompile",
+            "group": "build"
+        },
+        {
+            "label": "build all",
+            "dependsOn": [
+                "build MyFirstWebAPI",
+                "build MyFirstUI"
+            ],
+            "dependsOrder": "parallel",
+            "problemMatcher": []
+        },
+        {
+            "label": "run MyFirstWebAPI",
+            "type": "shell",
+            "command": "dotnet",
+            "args": [
+                "run",
+                "--project",
+                "${workspaceFolder}/MyFirstWebAPI/MyFirstWebAPI.csproj"
+            ],
+            "isBackground": true,
+            "problemMatcher": {
+                "pattern": {
+                    "regexp": "^\\s*$",
+                    "file": 1,
+                    "location": 2,
+                    "message": 3
+                },
+                "background": {
+                    "activeOnStart": true,
+                    "beginsPattern": "^.*Building\\.\\.\\.$",
+                    "endsPattern": "^.*Now listening on:.*$"
+                }
+            },
+            "presentation": {
+                "group": "servers",
+                "panel": "dedicated"
+            }
+        },
+        {
+            "label": "run MyFirstUI",
+            "type": "shell",
+            "command": "dotnet",
+            "args": [
+                "run",
+                "--project",
+                "${workspaceFolder}/MyFirstUI/MyFirstUI.csproj"
+            ],
+            "isBackground": true,
+            "problemMatcher": {
+                "pattern": {
+                    "regexp": "^\\s*$",
+                    "file": 1,
+                    "location": 2,
+                    "message": 3
+                },
+                "background": {
+                    "activeOnStart": true,
+                    "beginsPattern": "^.*Building\\.\\.\\.$",
+                    "endsPattern": "^.*Now listening on:.*$"
+                }
+            },
+            "presentation": {
+                "group": "servers",
+                "panel": "dedicated"
+            }
+        },
+        {
+            "label": "run all",
+            "dependsOn": [
+                "run MyFirstWebAPI",
+                "run MyFirstUI"
+            ],
+            "dependsOrder": "parallel",
+            "problemMatcher": []
         }
     ]
 }
