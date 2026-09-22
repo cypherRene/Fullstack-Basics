@@ -1,0 +1,41 @@
+@page "/employee"
+@inject IHttpClientFactory HttpClientFactory
+
+<PageTitle>Employee</PageTitle>
+
+<h1>Employee</h1>
+
+@if (errorMessage is not null)
+{
+    <p class="text-danger">@errorMessage</p>
+}
+else if (employeeName is null)
+{
+    <p><em>Lädt...</em></p>
+}
+else
+{
+    <div class="mb-3">
+        <label for="employeeName" class="form-label">Name</label>
+        <input id="employeeName" class="form-control" @bind="employeeName" />
+    </div>
+}
+
+@code {
+    private string? employeeName;
+    private string? errorMessage;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var http = HttpClientFactory.CreateClient("Api");
+
+        try
+        {
+            employeeName = await http.GetStringAsync("api/employee");
+        }
+        catch (Exception ex)
+        {
+            errorMessage = $"Employee konnte nicht geladen werden: {ex.Message}";
+        }
+    }
+}
